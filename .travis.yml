@@ -1,5 +1,10 @@
-language: java
-script: "mvn verify"
 jdk:
-  - openjdk7
-  - openjdk8
+- openjdk8
+language: java
+script:
+- touch /tmp/NOW
+- echo GIBSTUDYSTART $(date)
+- mvn verify
+- echo GIBSTUDYEND $(date)
+- cd $TRAVIS_BUILD_DIR
+- echo TESTNUM $(find . -name TEST-*.xml -newer /tmp/NOW | wc -l)
